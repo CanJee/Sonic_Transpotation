@@ -72,7 +72,7 @@ Template.register.events({
             if(error){
                 console.log(error.reason); // Output error if registration fails
             } else {
-                Router.go("pageOne"); // Redirect user if registration succeeds
+                Router.go("destinations"); // Redirect user if registration succeeds
                 debugger;
                 Meteor.users.update({_id:Meteor.user()._id}, { $set: { profile: { name: name } } });
             }  
@@ -90,7 +90,7 @@ Template.loginTwo.events({
             if(error){
                 console.log(error.reason);
             } else {
-                Router.go("pageOne");
+                Router.go("destinations");
             }
         });
     }

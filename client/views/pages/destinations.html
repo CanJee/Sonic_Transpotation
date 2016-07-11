@@ -1,0 +1,27 @@
+<template name="destinations">
+
+    {{> pageHeading title='Destinations' }}
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="m-t-lg">
+                    <h1>
+                        Destinations
+                    </h1>
+                </div>
+            </div>
+            <ul>
+              {{#each destinations}}
+                {{> destination}}
+              {{/each}}
+            </ul>
+        </div>
+    </div>
+</template>
+
+<template name="destination">
+  <li>{{location}}</li>
+  <li>{{iso}}</li>
+  <li>{{createdAt}}</li>
+</template>

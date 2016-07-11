@@ -33,7 +33,7 @@ Router.route('/register', function () {
 	    this.layout('blankLayout')
 	}
 	else {
-		Router.go('pageOne', {replaceState: true});
+		Router.go('destinations', {replaceState: true});
 	}
 
 });
@@ -44,20 +44,20 @@ Router.route('/login', function () {
 	    this.layout('blankLayout')
 	}
 	else {
-		Router.go('pageOne', {replaceState: true});
+		Router.go('destinations', {replaceState: true});
 	}
 });
 
 Router.route('/', function () {
-    Router.go('pageOne', {replaceState: true});
+    Router.go('destinations', {replaceState: true});
 });
 
 Router.route('/errorTwo', function () {
     Router.go('errorTwo');
 });
 
-Router.route('/pageOne', function () {
-    this.render('pageOne');
+Router.route('/destinations', function () {
+    this.render('destinations');
 });
 
 Router.route('/pageTwo', function () {
