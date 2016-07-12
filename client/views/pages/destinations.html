@@ -11,17 +11,61 @@
                     </h1>
                 </div>
             </div>
-            <ul>
-              {{#each destinations}}
-                {{> destination}}
-              {{/each}}
-            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Add a Destination</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form role="form" id="destination-form" class="form-inline">
+                                <div class="form-group">
+                                <input type="text" name="location" placeholder="Enter location" id="location" class="form-control required"></div>
+                                <div class="form-group">
+                                <input type="text" name="min" id="iso" placeholder="Enter ISO Code" class="form-control required"></div>
+                            <button class="btn btn-primary" type="submit" style="margin-bottom: 0px;">Add Destination</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Current Destinations</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>ISO Code</th>
+                                <th>Created By</th>
+                                <th>Functions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {{#each destinations}}
+                                    {{> destination}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <template name="destination">
-  <li>{{location}}</li>
-  <li>{{iso}}</li>
-  <li>{{createdAt}}</li>
+    <tr>
+      <td>{{location}}</td>
+      <td>{{iso}}</td>
+      <td>{{createdBy}}</td>
+      <td><i class="fa fa-trash delete-destination" loc-id="{{_id}}" aria-hidden="true"></i></td>
+    </tr>
 </template>

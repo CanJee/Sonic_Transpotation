@@ -6,3 +6,13 @@
     padding-top: 15PX;
     width: 22%;
 }
+
+.delete-destination {
+	font-size: 14px; 
+	color: darkred;
+}
+
+.delete-destination:hover {
+	cursor: pointer;
+	color: red;
+}
