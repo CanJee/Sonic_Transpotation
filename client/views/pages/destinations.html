@@ -59,6 +59,7 @@
             </div>
         </div>
     </div>
+    {{> editDestinationModalTemplate}}
 </template>
 
 <template name="destination">
@@ -66,6 +67,9 @@
       <td>{{location}}</td>
       <td>{{iso}}</td>
       <td>{{createdBy}}</td>
-      <td><i class="fa fa-trash delete-destination" loc-id="{{_id}}" aria-hidden="true"></i></td>
+      <td>
+        <i class="fa fa-trash delete-destination" data-toggle="tooltip" data-placement="left" title="" data-original-title="Delete this destination" loc-id="{{_id}}" location="{{location}}" iso="{{iso}}" aria-hidden="true"></i> &nbsp; &nbsp;
+        <i class="fa fa-pencil edit-destination" data-toggle="tooltip" data-placement="right" title="" data-original-title="Edit this destination" data-loc-id="{{_id}}" location="{{location}}" iso="{{iso}}" aria-hidden="true"></i>
+      </td>
     </tr>
 </template>

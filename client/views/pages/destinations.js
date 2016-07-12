@@ -20,6 +20,12 @@ Template.destinations.rendered = function(){
             }
         },
     });
+
+    
+};
+
+Template.destination.rendered = function(){
+	$("[data-toggle=tooltip]").tooltip();
 };
 
 Template.destinations.helpers({
@@ -29,7 +35,7 @@ Template.destinations.helpers({
 });
 
 Template.destinations.events({
-  'submit #destination-form'(event) {
+  'submit #destinationForm'(event) {
     // Prevent default browser form submit
     event.preventDefault();
  
@@ -43,7 +49,32 @@ Template.destinations.events({
   'click .delete-destination'(event) {
   	event.preventDefault();
   	const locationId = $(event.target).attr('loc-id')
-
-  	Meteor.call('destinations.remove', locationId);
+  	const location = $(event.target).attr('location')
+  	const iso = $(event.target).attr('iso')
+  	swal({
+        title: "Are you sure?",
+        text: `Destination ${location} (${iso}) will be deleted permanently!`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false },
+    	function (isConfirm) {
+	        if (isConfirm) {
+				Meteor.call('destinations.remove', locationId);
+	            swal("Deleted!", `Destination ${location} (${iso}) has been deleted successfully.`, "success");
+	        } else {
+	            swal("Cancelled", `Destination ${location} (${iso}) has not been deleted :)`, "error");
+	        }
+    	});
+  },
+  'click .edit-destination'(event) {
+  	event.preventDefault();
+    const locationId = $(event.target).attr('loc-id')
+    const location = $(event.target).attr('location')
+    const iso = $(event.target).attr('iso')
+  	$('#editDestinationModal').modal('show', $(this));
   },
 });

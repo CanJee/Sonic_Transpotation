@@ -24,6 +24,16 @@ Meteor.methods({
  
     Destinations.remove(destinationId);
   },
+  'destinations.find'(destinationId) {
+    check(destinationId, String);
+
+    return Destinations.find( { _id: destinationId } ).fetch()[0];
+  },
+  'destinations.update'(destinationId, location, iso) {
+    check(destinationId, String);
+    
+    Destinations.update({_id : destinationId},{$set:{location, iso}});
+  },
 });
 
 function capitalizeFirstLetter(string) {

@@ -8,11 +8,21 @@
 }
 
 .delete-destination {
-	font-size: 14px; 
-	color: darkred;
+	font-size: 17px; 
+	color: #ec4758;
 }
 
 .delete-destination:hover {
 	cursor: pointer;
-	color: red;
+	color: #c9302c;
+}
+
+.edit-destination {
+	font-size: 17px; 
+	color: #f7a54a;
+}
+
+.edit-destination:hover {
+	cursor: pointer;
+	color: #ec971f;
 }
