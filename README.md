@@ -1,7 +1,7 @@
 # Sonic Transportation - Meteor version 2015
 ## version: 1.0
 
-[ ![Codeship Status for CanJee/Sonic_Transpotation](https://codeship.com/projects/6886ded0-2b44-0134-7865-6a296796efa4/status?branch=master)](https://codeship.com/projects/163101)
+[![Build Status](https://travis-ci.org/CanJee/Sonic_Transpotation.svg?branch=master)](https://travis-ci.org/CanJee/Sonic_Transpotation)
 
 Meteor.js is an open-source platform built on Node and MongoDB
 
