@@ -20,7 +20,7 @@ Template.mainLayout.rendered = function(){
                 $('#page-wrapper').css("min-height", navbarHeigh + "px");
             }
 
-            if(navbarHeigh < wrapperHeigh)
+            if(navbarHeigh < wrapperHeigh){
                 $('#page-wrapper').css("min-height", $(window).height()  + "px");
             }
 
