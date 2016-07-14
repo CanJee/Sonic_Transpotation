@@ -35,7 +35,7 @@ Template.destinations.helpers({
 });
 
 Template.destinations.events({
-  'submit #destinationForm'(event) {
+  'submit #destination-form'(event) {
     // Prevent default browser form submit
     event.preventDefault();
  
@@ -44,7 +44,14 @@ Template.destinations.events({
     const iso = $('input#iso').val();
  
     // Insert a task into the collection
-    Meteor.call('destinations.insert', location, iso);
+    Meteor.call('destinations.insert', location, iso, function(error, result) {
+      if (!error) {
+        toastr.success('Destination added successfully.');
+      }
+      else {
+        toastr.error(error.error);
+      }
+    });
   },
   'click .delete-destination'(event) {
   	event.preventDefault();

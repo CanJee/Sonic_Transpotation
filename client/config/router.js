@@ -60,8 +60,8 @@ Router.route('/destinations', function () {
     this.render('destinations');
 });
 
-Router.route('/pageTwo', function () {
-    this.render('pageTwo');
+Router.route('/schedules', function () {
+    this.render('schedules');
 });
 
 Router.route('/*', function () {
