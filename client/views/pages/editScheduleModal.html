@@ -1,51 +1,47 @@
-<template name="createScheduleModalTemplate">
-    <div class="modal inmodal fade in" id="createScheduleModal" tabindex="-1" role="dialog" aria-hidden="true">
+<template name="editScheduleModalTemplate">
+    <div class="modal inmodal fade in" id="editScheduleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <i class="fa fa-calendar modal-icon"></i>
-                    <h4 class="modal-title">Create Schedule</h4>
+                    <h4 class="modal-title">Edit Schedule</h4>
                 </div>
-                <form class="form-horizontal" id="create-schedule-form" novalidate="false">
+                <form class="form-horizontal" id="edit-schedule-form" novalidate="false">
                     <div class="modal-body">
-
+                        <div class="form-group" style="display: none;"><label class="col-lg-4 control-label">Schedule ID</label>
+                            <div class="col-lg-8">
+                                <input type="text" name="scheduleId" id="edit-schedule-id" class="form-control required" disabled>
+                            </div>
+                        </div>
                         <div class="form-group"><label class="col-lg-4 control-label">Departure Location</label>
                             <div class="col-lg-8">
-                                <div class="input-group">
-                                    <select data-placeholder="Choose a departure location..." class="chosen-select departure-location" id="departure-location" name="departure" style="width:350px;" tabindex="2">
-                                        <option></option>
-                                    </select>
-                                </div>
+                                <input type="text" name="departure" id="edit-departure-location" class="form-control required" disabled>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-lg-4 control-label">Arrival Location</label>
                             <div class="col-lg-8">
-                                <div class="input-group">
-                                    <select data-placeholder="Choose an arrival location..." class="chosen-select arrival-location" id="arrival-location" name="arrival" style="width:350px;" tabindex="2">
-                                        <option></option>
-                                    </select>
-                                </div>
+                                <input type="text" name="arrival" id="edit-arrival-location" class="form-control required" disabled>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-lg-4 control-label">Price Per Ticket</label>
                             <div class="col-lg-8">
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
-                                    <input type="text" name="price" id="price" class="form-control required">
+                                    <input type="text" name="price" id="edit-price" class="form-control required" disabled>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group"><label class="col-lg-4 control-label" >Available Seats</label>
+                        <div class="form-group"><label class="col-lg-4 control-label" >Seats Remaining</label>
                             <div class="col-lg-8">
-                                <input type="number" name="seats" id="number-seats" value="" class="form-control required">
+                                <input type="number" name="seats" id="edit-seats-remaining" value="" class="form-control required" disabled>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-lg-4 control-label">Schedule Date</label>
                             <div class="col-lg-8">
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" name="date" id="schedule-date" class="form-control required" >
+                                    <input type="text" name="date" id="edit-schedule-date" class="form-control required" disabled>
                                 </div>
                             </div>
                         </div>
@@ -53,14 +49,14 @@
                             <div class="col-lg-8">
                                 <div class="input-group schedule-time" data-autoclose="true">
                                     <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    <input type="text" name="time" id="schedule-time" class="form-control required" >
+                                    <input type="text" name="time" id="edit-schedule-time" class="form-control required" disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-lg-4 control-label">Status</label>
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <select data-placeholder="Choose a status" class="chosen-select status" id="status" name="status" style="width:350px;" tabindex="2">
+                                    <select data-placeholder="Choose a status" class="chosen-select status" id="edit-status" name="status" style="width:350px;" tabindex="2">
                                         <option value="open">Open</option>
                                         <option value="closed">Closed</option>
                                     </select>
@@ -70,7 +66,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create Schedule</button>
+                        <button type="submit" class="btn btn-primary">Update Schedule</button>
                     </div>
                 </form>
             </div>

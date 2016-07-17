@@ -33,8 +33,8 @@ Template.editDestinationModalTemplate.events({
   'submit #edit-destination-form'(event) {
   	event.preventDefault();
   	id = $("#modal-loc-id").val();
-	desLocation = $("#modal-location").val();
-	iso = $("#modal-iso").val();
+	  desLocation = $("#modal-location").val();
+	  iso = $("#modal-iso").val();
   	Meteor.call('destinations.update', id, desLocation, iso, function(error, result) {
   		if (!error) {
 

@@ -7,22 +7,43 @@
     width: 22%;
 }
 
-.delete-destination {
+.fa.danger {
 	font-size: 17px; 
 	color: #ec4758;
 }
 
-.delete-destination:hover {
+.fa.danger:hover {
 	cursor: pointer;
 	color: #c9302c;
 }
 
-.edit-destination {
+.fa.warning {
 	font-size: 17px; 
 	color: #f7a54a;
 }
 
-.edit-destination:hover {
+.fa.warning:hover {
 	cursor: pointer;
 	color: #ec971f;
+}
+
+.fa.success {
+	font-size: 17px; 
+	color: #1ab394;
+}
+
+.fa.success:hover {
+	cursor: pointer;
+	color: #18a689;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.clockpicker-popover {
+    z-index: 999999;
 }
