@@ -47,3 +47,14 @@ input::-webkit-inner-spin-button {
 .clockpicker-popover {
     z-index: 999999;
 }
+
+.chosen-container .chosen-drop {
+      position: fixed;
+      display: none;
+      top: auto;
+      left: auto;
+}
+.chosen-container.chosen-with-drop .chosen-drop {
+      display: block;
+      left: auto;
+}

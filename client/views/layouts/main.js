@@ -116,3 +116,7 @@ jQuery.validator.addMethod("time24", function(value, element) {
 $.validator.addMethod("departurearrivalnotsame", function(value, element) {
    return $('#departure-location').val() != $('#arrival-location').val()
 }, "Departure and Arrival locations cannot be the same.");
+
+$.validator.addMethod("searchdeparturearrivalnotsame", function(value, element) {
+   return $('#search-departure-location').val() != $('#search-arrival-location').val()
+}, "Departure and Arrival locations cannot be the same.");

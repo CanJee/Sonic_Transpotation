@@ -26,8 +26,12 @@
                 </li>
                 <li class="{{isActiveRoute regex='destinations'}}">
                     <a href="{{pathFor route='destinations'}}"><i class="fa fa-globe"></i> <span class="nav-label">Destinations</span> </a>
-                </li>          <li class="{{isActiveRoute regex='schedules'}}">
+                </li>          
+                <li class="{{isActiveRoute regex='^schedules'}}">
                     <a href="{{pathFor route='schedules'}}"><i class="fa fa-calendar"></i> <span class="nav-label">Schedules</span> </a>
+                </li>
+                <li class="{{isActiveRoute regex='^searchSchedules'}}">
+                    <a href="{{pathFor route='searchSchedules'}}"><i class="fa fa-search"></i> <span class="nav-label">Search Schedules</span> </a>
                 </li>
             </ul>
 

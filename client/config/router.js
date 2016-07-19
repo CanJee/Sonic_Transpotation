@@ -64,6 +64,10 @@ Router.route('/schedules', function () {
     this.render('schedules');
 });
 
+Router.route('/searchSchedules', function () {
+    this.render('searchSchedules');
+});
+
 Router.route('/*', function () {
     this.render('errorTwo');
     this.layout('blankLayout')

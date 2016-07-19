@@ -49,6 +49,14 @@ Meteor.methods({
 
 	    return Schedules.find().fetch();
   	},
+  	'schedules.findByDepartureArrivalDate'(departureId, arrivalId, departureDate) {
+	    // Make sure the user is logged in before inserting a task
+	    if (! this.userId) {
+	      throw new Meteor.Error('not-authorized');
+	    }
+
+	    return Schedules.find( { departureId, arrivalId, departureDate } ).fetch()
+  	},
   	'schedules.updateStatus'(scheduleId, status) {
 	    // Make sure the user is logged in before inserting a task
 	    if (! this.userId) {
