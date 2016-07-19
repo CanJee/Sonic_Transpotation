@@ -1,0 +1,131 @@
+<template name="searchSchedules">
+
+    {{> pageHeading title='Search for Schedules' }}
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="m-t-lg">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h2>
+                            Search for Schedules
+                        </h2>
+                        <p>
+                            Please fill out the information below to search for available schedules.
+                        </p>
+
+                        <form id="form" action="#" class="wizard-big">
+                            <h1>Search Schedules</h1>
+                            <fieldset>
+                                <h2>Account Information</h2>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label>Departure Location</label>
+                                            <div class="input-group">
+                                                <select data-placeholder="Choose a departure location..." class="chosen-select search-departure-location" id="search-departure-location" name="departure" style="width:350px;" tabindex="2">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Arrival Location</label>
+                                            <div class="input-group">
+                                                <select data-placeholder="Choose an arrival location..." class="chosen-select arrival-location" id="search-arrival-location" name="arrival" style="width:350px;" tabindex="2">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Schedule Date</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" name="date" id="schedule-date" class="form-control required" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="text-center">
+                                            <div style="margin-top: 20px">
+                                                <i class="fa fa-search" style="font-size: 180px;color: #e5e5e5 "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <h1>Book a Schedule</h1>
+                            <fieldset>
+                                <h2>Schedules</h2>
+                                {{> searchedSchedules}}
+                            </fieldset>
+
+                            <h1>Warning</h1>
+                            <fieldset>
+                                <div class="text-center" style="margin-top: 120px">
+                                    <h2>You did it Man :-)</h2>
+                                </div>
+                            </fieldset>
+
+                            <h1>Finish</h1>
+                            <fieldset>
+                                <h2>Terms and Conditions</h2>
+                                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="searchedSchedules">
+    <div class="row">
+        <table class="footable table toggle-arrow-tiny searched-schedules-list" id="searched-schedules-list" data-filter=#filter>
+            <thead>
+            <tr>
+                <th >Select</th>
+                <th >Departing</th>
+                <th >Arriving</th>
+                <th >Price</th>
+                <th >Departure Date</th>
+                <th >Departure Time</th>
+                <th >Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{#each searchedSchedules}}
+                    {{> searchedSchedule}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template name="searchedSchedule">
+    <tr>
+      <td></td>
+      <td>{{departureLocation}}</td>
+      <td>{{arrivalLocation}}</td>
+      <td>{{price}}</td>
+      <td>{{departureDate}}</td>
+      <td>{{departureTime}}</td>
+      {{#if statusBooked}}
+        <td><span class="label label-danger">booked</span></td>
+      {{else}}
+        {{#if statusClosed}}
+            <td><span class="label label-warning">not available</span></td>
+        {{else}}
+            <td><span class="label label-primary">available</span></td>
+        {{/if}}
+      {{/if}}
+    </tr>
+</template>

@@ -25,6 +25,9 @@
                     </div>
                 </li>
                 <li class="{{isActiveRoute regex='destinations'}}">
+                    <a href="{{pathFor route='members'}}"><i class="fa fa-user"></i> <span class="nav-label">Members</span> </a>
+                </li>
+                <li class="{{isActiveRoute regex='destinations'}}">
                     <a href="{{pathFor route='destinations'}}"><i class="fa fa-globe"></i> <span class="nav-label">Destinations</span> </a>
                 </li>          
                 <li class="{{isActiveRoute regex='^schedules'}}">
@@ -33,8 +36,27 @@
                 <li class="{{isActiveRoute regex='^searchSchedules'}}">
                     <a href="{{pathFor route='searchSchedules'}}"><i class="fa fa-search"></i> <span class="nav-label">Search Schedules</span> </a>
                 </li>
-            </ul>
+                <li class="{{isActiveRoute regex='schedules'}}">
+                    <a href="{{pathFor route='schedules'}}"><i class="fa fa-calendar"></i> <span class="nav-label">Schedules</span> </a>
+                </li>
+                <li class="{{isActiveRoute regex='reservations'}}">
+                <a href="{{pathFor route='reservations'}}"><i class="fa fa-ticket"></i> <span class="nav-label">Reservations</span> </a>
+                </li>
+                <li class="{{isActiveRoute regex='viewInvoice'}}">
+                <a href="{{pathFor route='viewInvoice'}}"><i class="fa fa-money"></i> <span class="nav-label">Invoice</span> </a>
+                </li>
+                  <li class="{{isActiveRoute regex='statistics'}}">
+                <a href="{{pathFor route='analytics'}}"><i class="fa fa-line-chart"></i> <span class="nav-label">Sales Analytics</span> </a>
+                </li>
+                 
+                  <li class="{{isActiveRoute regex='statistics'}}">
+                <a href="{{pathFor route='reviews'}}"><i class="fa fa-comments"></i> <span class="nav-label">Reviews</span> </a>
+                </li>
+                  <li class="{{isActiveRoute regex='statistics'}}">
+                <a href="{{pathFor route='settings'}}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span> </a>
+                </li>
 
+            </ul>
         </div>
     </nav>
 </template>
