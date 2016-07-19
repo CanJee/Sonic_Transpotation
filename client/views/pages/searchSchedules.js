@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Schedules } from '../../../imports/api/schedules.js';
 import { Destinations } from '../../../imports/api/destinations.js';
+import { Reservations } from '../../../imports/api/reservations.js';
 
 Template.searchSchedules.rendered = function(){
 	var createdFooTable = false;
@@ -8,6 +9,10 @@ Template.searchSchedules.rendered = function(){
         bodyTag: "fieldset",
         transitionEffect: "slide",
     	autoFocus: true,
+    	labels: {
+	        finish: "Complete Reservation",
+	        loading: "Loading ..."
+    	},
         onStepChanging: function (event, currentIndex, newIndex)
         {
             // Always allow going backward even if the current step contains invalid fields!
@@ -19,7 +24,6 @@ Template.searchSchedules.rendered = function(){
             // Forbid suppressing "Warning" step if the user is to young
             if (currentIndex == 1 && newIndex === 2)
             {
-            	debugger;
                 var selected = $('input[name=bookThisSchedule]:checked');
                 if (selected.length == 0) {
                 	swal({
@@ -50,12 +54,7 @@ Template.searchSchedules.rendered = function(){
         },
         onStepChanged: function (event, currentIndex, priorIndex)
         {
-            // Suppress (skip) "Warning" step if the user is old enough.
-            if (currentIndex === 2 && Number($("#age").val()) >= 18)
-            {
-                $(this).steps("next");
-            }
-
+        	var form = $(this);
             if (currentIndex == 1 && priorIndex === 0) 
             {
             	var resultSchedulesList;
@@ -113,10 +112,65 @@ Template.searchSchedules.rendered = function(){
 
             }
 
-            // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-            if (currentIndex === 2 && priorIndex === 3)
+            if (currentIndex == 2)
             {
-                $(this).steps("previous");
+            	// $('.passenger-info-next').click(function() {
+            	// 	$(form).validate().settings.ignore = false;
+            	// });
+            	$('#form').card({
+				    // a selector or DOM element for the container
+				    // where you want the card to appear
+				    container: '.card-wrapper', // *required*
+				    width: 250,
+
+				    placeholders: {
+				        number: '•••• •••• •••• ••••',
+				        name: 'Full Name',
+				        expiry: '••/••',
+				        cvc: '•••'
+				    },
+
+				    // all of the other options from above
+				});
+            }
+
+
+            if (currentIndex === 2) {
+            	form.validate().settings.ignore = false;
+            }
+            else {
+            	form.validate().settings.ignore = ":disabled,:hidden";
+            }
+
+            if (currentIndex === 3) {
+            	selectedScheduleId = $('input[name=bookThisSchedule]:checked').attr('schedule-id');
+            	resultingSchedule = Schedules.find({ _id: selectedScheduleId }).fetch()[0];
+            	departureLocation = Destinations.find({ _id: resultingSchedule.departureId }).fetch()[0].location;
+            	arrivalLocation = Destinations.find({ _id: resultingSchedule.arrivalId }).fetch()[0].location;
+            	ccNumber = $('#card-number').val();
+            	$('.summary-departure-location').text(departureLocation);
+            	$('.summary-arrival-location').text(arrivalLocation);
+            	$('.summary-departure-date').text(resultingSchedule.departureDate);
+            	$('.summary-departure-time').text(resultingSchedule.departureTime);
+            	$('.summary-first-name').text($('#passenger-first-name').val());
+            	$('.summary-last-name').text($('#passenger-last-name').val());
+            	$('.summary-price').text(resultingSchedule.price);
+            	$('.summary-cc-name').text($('#card-name').val());
+            	$('.summary-cc-expiry').text($('#card-expiry').val());
+            	maskedCCNumber = Array(ccNumber.length - 3).join("*") + ccNumber.substr(ccNumber.length - 4);
+            	$('.summary-cc-number').text(maskedCCNumber);
+            	if (ccNumber.substring(0, 1) == "3"){
+            		$('.summary-cc-card').html("<i class='fa fa-cc-amex payment-icon-big text-success'></i>");
+            	}
+            	else if (ccNumber.substring(0, 1) == "4"){
+            		$('.summary-cc-card').html("<i class='fa fa-cc-visa payment-icon-big text-success'></i>");
+            	}
+            	else if (ccNumber.substring(0, 1) == "5"){
+            		$('.summary-cc-card').html("<i class='fa fa-cc-mastercard payment-icon-big text-success'></i>");
+            	}
+            	else if (ccNumber.substring(0, 1) == "6"){
+            		$('.summary-cc-card').html("<i class='fa fa-cc-discover payment-icon-big text-success'></i>");
+            	}
             }
         },
         onFinishing: function (event, currentIndex)
@@ -132,16 +186,41 @@ Template.searchSchedules.rendered = function(){
         },
         onFinished: function (event, currentIndex)
         {
-            var form = $(this);
+        	setTimeout(function() {
+			  	swal({
+		            title: "Reservation Complete",
+		            text: "Your Reservation is complete.",
+		            type: "success"
+	        	},
+	        	function(){
+				    window.location.href = 'searchSchedules';
+				});
+			}, 5000);
+            
+	        $('.summary-view').hide();
+			$('.loading-view').show();
 
-            // Submit form input
-            form.submit();
+			scheduleId = $('input[name=bookThisSchedule]:checked').attr('schedule-id');
+			departureId = $('#search-departure-location').val();
+			arrivalId = $('#search-arrival-location').val();
+			passengerFirstName = $('#passenger-first-name').val();
+			passengerLastName = $('#passenger-last-name').val();
+			Meteor.call('reservations.insert', scheduleId, departureId, arrivalId, passengerFirstName, passengerLastName,  function(error, result) {
+				debugger;
+			});
         }
     }).validate({
         errorPlacement: function (error, element)
         {
             error.insertAfter($(element).closest('.input-group'));
         },
+        invalidHandler: function(e,validator) {
+		    // loop through the errors:
+		    for (var i=0;i<validator.errorList.length;i++){
+		        // "uncollapse" section containing invalid input/s:
+		        $(validator.errorList[i].element).closest('.panel-collapse.collapse').collapse('show');
+		    }
+		},
         rules: {
             departure: {
         		required: true,
@@ -154,6 +233,14 @@ Template.searchSchedules.rendered = function(){
         	date: {
                 required: true,
                 optdate: true,
+            },
+            firstName: {
+                required: true,
+                minlength: 3,
+            },
+            lastName: {
+                required: true,
+                minlength: 3,
             },
         }
     });
@@ -191,19 +278,4 @@ Template.searchSchedules.rendered = function(){
 		$('.chosen-container.chosen-container-single').attr("style", "width: 545px !important;");
 		$('.chosen-container.chosen-container-single .chosen-drop').attr("style", "width: 545px !important;");
 	}, 500);
-
-
 };
-
-// Template.searchSchedules.helpers({
-				  
-//   	searchedSchedules() {
-//   		debugger;
-//   		departureId = $('#search-departure-location').val();
-//   		arrivalId = $('#search-arrival-location').val();
-//   		scheduleDate = ('#schedule-date').val();
-//   		Meteor.call('schedules.findByDepartureArrivalDate', departureId, arrivalId, scheduleDate, function(error, result) {
-//   			debugger;
-//   		});
-// 	},
-// });

@@ -15,16 +15,16 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <h2>
-                            Search for Schedules
+                            Make a Reservation
                         </h2>
                         <p>
-                            Please fill out the information below to search for available schedules.
+                            Complete the steps below to make a reservation.
                         </p>
 
                         <form id="form" action="#" class="wizard-big">
                             <h1>Search Schedules</h1>
                             <fieldset>
-                                <h2>Account Information</h2>
+                                <h2>Search for Schedules</h2>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div class="form-group">
@@ -61,23 +61,20 @@
                                 </div>
 
                             </fieldset>
-                            <h1>Book a Schedule</h1>
+                            <h1>Select a Schedule</h1>
                             <fieldset>
-                                <h2>Schedules</h2>
+                                <h2>Available Schedules</h2>
                                 {{> searchedSchedules}}
                             </fieldset>
 
-                            <h1>Warning</h1>
+                            <h1>Reservation Info</h1>
                             <fieldset>
-                                <div class="text-center" style="margin-top: 120px">
-                                    <h2>You did it Man :-)</h2>
-                                </div>
+                                {{> reservationInfo}}
                             </fieldset>
 
-                            <h1>Finish</h1>
+                            <h1>Confirm Reservation</h1>
                             <fieldset>
-                                <h2>Terms and Conditions</h2>
-                                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                                {{> summaryPage}}
                             </fieldset>
                         </form>
                     </div>
@@ -128,4 +125,169 @@
         {{/if}}
       {{/if}}
     </tr>
+</template>
+
+<template name="reservationInfo">
+    <div class="panel-group payments-method" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-right">
+                    <i class="fa fa-male"></i>
+                </div>
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Passenger Info</a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label>PASSENGER FIRST NAME</label>
+                                    <input type="text" class="form-control required" id="passenger-first-name" name="firstName" placeholder="Passenger First Name" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label>PASSENGER LAST NAME</label>
+                                    <input type="text" class="form-control required" id="passenger-last-name" name="lastName" placeholder="Passenger Last Name" required/>
+                                </div>
+                            </div>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="btn btn-success passenger-info-next">
+                                <i class="fa fa-arrow-right">
+                                    Next
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-right">
+                    <i class="fa fa-cc-amex text-success"></i>
+                    <i class="fa fa-cc-visa text-warning"></i>
+                    <i class="fa fa-cc-mastercard text-primary"></i>
+                    <i class="fa fa-cc-discover text-danger"></i>
+                </div>
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Credit Card</a>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class='card-wrapper' style="margin-top: 10px;"></div>
+                        </div>
+                        <div class="col-md-6" style="margin-left: 80px;">                            
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label>CARD NUMBER</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="number" placeholder="•••• •••• •••• ••••" id="card-number" required />
+                                            <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-7 col-md-7">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <label>EXPIRATION DATE</label>
+                                            <input type="text" class="form-control" id="card-expiry" name="expiry" placeholder="MM/YY"  required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <label>CVC CODE</label>
+                                            <input type="text" class="form-control" id="card-cvc" name="cvc" placeholder="•••"  required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <label>FULL NAME</label>
+                                            <input type="text" class="form-control" id="card-name" name="name" placeholder="Full Name" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="summaryPage">
+
+    <div class="summary-view">
+        <div class="text-success">
+            <h1><i class="fa fa-check"></i> Reservation Summary</h1>
+        </div>
+        <div class="">
+            <h2>
+                <div class="col-md-6"><strong>Departure Location:</strong></div>
+                <div class="col-md-6"><span class="summary-departure-location"></span></div> <br/>
+                <div class="col-md-6"><strong>Arrival Location:</strong></div>
+                <div class="col-md-6"><span class="summary-arrival-location"></span></div> <br/>
+                <div class="col-md-6"><strong>Departure Date:</strong></div>
+                <div class="col-md-6"><span class="summary-departure-date"></span></div> <br/>
+                <div class="col-md-6"><strong>Departure Time:</strong></div>
+                <div class="col-md-6"><span class="summary-departure-time"></span></div> <br/>
+                <div class="col-md-6"><strong>Passenger First Name:</strong></div>
+                <div class="col-md-6"><span class="summary-first-name"></span></div> <br/>
+                <div class="col-md-6"><strong>Passenger Last Name:</strong></div>
+                <div class="col-md-6"><span class="summary-last-name"></span></div> <br/>
+                <div class="col-md-6"><strong>Price:</strong></div>
+                <div class="col-md-6"><span class="text-navy">$<span class="summary-price"></span></span></div> 
+                <div class="col-md-8" style="margin-top: 10px;">
+                    <div class="payment-card">
+                        <span class="summary-cc-card"></span>
+                        <h2>
+                            <span class="summary-cc-number"></span>
+                        </h2>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <small>
+                                    <strong>Expiry date:&nbsp;</strong> <span class="summary-cc-expiry"></span>
+                                </small>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <small>
+                                    <strong>Name:&nbsp;</strong><span class="summary-cc-name"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h2>
+        </div>
+    </div>
+    <div class='loading-view' style="display: none;">
+        <div class="text-center" style="margin-top: 120px">
+            <div class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
+            </div>
+            <h2>Please wait while your payment is being processed</h2>
+        </div>
+    </div>
 </template>

@@ -28,7 +28,7 @@ Template.editReservationsModalTemplate.events({
 	    	$("#modal-location").val(result.location);
 	    	$("#modal-iso").val(result.iso);
 	    }
-	});
+	  });
   },
   'submit #edit-reservations-form'(event) {
   	event.preventDefault();

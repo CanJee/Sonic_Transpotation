@@ -73,6 +73,7 @@ Template.createScheduleModalTemplate.events({
 	        $(selector).chosen(config[selector]);
 	    }
     	$('.chosen-container.chosen-container-single').attr("style", "width: 545px !important;");
+    	$('.chosen-container.chosen-container-single .chosen-drop').attr("style", "width: 545px !important;");
     	$($('.status').closest('div')).find('.chosen-search').attr("style", "display: none;");
   	},
   	'submit #create-schedule-form'(event) {
