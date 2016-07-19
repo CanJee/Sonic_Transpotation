@@ -1,5 +1,6 @@
 # Sonic Transportation - Meteor version 2015
 ## version: 1.0
+## DEMO: https://sonic-transportation.herokuapp.com
 
 [![Build Status](https://travis-ci.org/CanJee/Sonic_Transpotation.svg?branch=master)](https://travis-ci.org/CanJee/Sonic_Transpotation)
 
