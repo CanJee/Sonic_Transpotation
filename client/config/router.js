@@ -64,6 +64,26 @@ Router.route('/schedules', function () {
     this.render('schedules');
 });
 
+Router.route('/viewInvoice', function () {
+    this.render('viewInvoice');
+});
+
+Router.route('/reservations', function () {
+    this.render('reservations');
+});
+
+Router.route('/settings', function () {
+    this.render('settings');
+});
+
+Router.route('/analytics', function () {
+    this.render('analytics');
+});
+
+Router.route('/members', function () {
+    this.render('members');
+});
+
 Router.route('/*', function () {
     this.render('errorTwo');
     this.layout('blankLayout')
