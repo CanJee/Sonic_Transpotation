@@ -58,3 +58,9 @@ Template.schedules.events({
 		$('#editScheduleModal').modal('show', $(this));
 	}
 });
+
+Template.schedule.rendered = function(){
+	$("[data-toggle=tooltip]").tooltip({
+    	container: 'body',
+	});
+};

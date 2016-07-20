@@ -25,7 +25,8 @@ Template.createScheduleModalTemplate.rendered = function(){
         forceParse: false,
         calendarWeeks: true,
         autoclose: true,
-        todayHighlight: true
+        todayHighlight: true,
+        format: 'D, d MM, yyyy',
     });
     $('.schedule-time').clockpicker();
 
@@ -87,12 +88,12 @@ Template.createScheduleModalTemplate.events({
 	  	scheduleTime = $("#schedule-time").val();
 
 	  	Meteor.call('schedules.insert', departureId, arrivalId, price, seats, scheduleDate, scheduleTime, status, function(error, result) {
-  		if (!error) {
+	  		if (!error) {
 
-  			$('#createScheduleModal').modal('hide');
+	  			$('#createScheduleModal').modal('hide');
 
-			toastr.success('Schedule created successfully.');
-  		}
-  	});
+				toastr.success('Schedule created successfully.');
+	  		}
+  		});
   	},
 });

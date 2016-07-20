@@ -20,11 +20,13 @@ Meteor.methods({
 	    scheduleId,
 	    departureId,
 	    arrivalId,
-	    reservedByUserId: Meteor.users.findOne(this.userId).profile.name,
+	    reservedByUserId: this.userId,
+	    reservedByUserName: Meteor.users.findOne(this.userId).profile.name,
+	    reservedByUserEmail: Meteor.users.findOne(this.userId).emails[0].address,
 	    passengerFirstName,
 	    passengerLastName,
 	    status: 'confirmed',
-	    reservationDate: new Date(),
+	    reservationDate: moment().format('ddd MMMM Do YYYY'),
 	});
 	updateSchedule = Schedules.find({ _id: scheduleId }).fetch()[0];
 	remainingSeats = parseInt(updateSchedule.remainingSeats);
@@ -33,7 +35,7 @@ Meteor.methods({
 	Schedules.update({_id : scheduleId},{$set:{remainingSeats}});
   },
   'reservations.find'(reservationId) {
-    check(destinationId, String);
+    check(reservationId, String);
 
     // Make sure the user is logged in before inserting a task
     if (! this.userId) {
@@ -41,5 +43,20 @@ Meteor.methods({
     }
 
     return Reservations.find( { _id: reservationId } ).fetch()[0];
+  },
+  'reservations.cancel'(reservationId) {
+    check(reservationId, String);
+
+    // Make sure the user is logged in before inserting a task
+    if (! this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+    scheduleId = Reservations.find( { _id: reservationId } ).fetch()[0].scheduleId;
+    updateSchedule = Schedules.find({ _id: scheduleId }).fetch()[0];
+	remainingSeats = parseInt(updateSchedule.remainingSeats);
+	remainingSeats++;
+	remainingSeats = remainingSeats.toString();
+	Schedules.update({_id : scheduleId},{$set:{remainingSeats}});
+    return Reservations.update({_id : reservationId},{$set:{status : 'cancelled'}});
   },
 });

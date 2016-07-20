@@ -68,26 +68,26 @@
       <td>{{arrivalLocation}}</td>
       <td>{{price}}</td>
       {{#if statusRed}}
-        <td><span class="label label-danger">{{remainingSeats}} / {{availableSeats}}</span></td>
+        <td><span class="label label-danger" style="font-size: 10pt;font-family: monospace;">{{remainingSeats}} / {{availableSeats}}</span></td>
       {{else}}
         {{#if statusYellow}}
-            <td><span class="label label-warning">{{remainingSeats}} / {{availableSeats}}</span></td>
+            <td><span class="label label-warning" style="font-size: 10pt;font-family: monospace;">{{remainingSeats}} / {{availableSeats}}</span></td>
         {{else}}
-            <td><span class="label label-primary">{{remainingSeats}} / {{availableSeats}}</span></td>
+            <td><span class="label label-primary" style="font-size: 10pt;font-family: monospace;">{{remainingSeats}} / {{availableSeats}}</span></td>
         {{/if}}
       {{/if}}
       <td>{{departureDate}} {{departureTime}}</td>
       <td>{{createdBy}}</td>
       {{#if statusOpen}}
-        <td><span class="label label-primary">{{status}}</span></td>
+        <td><span class="label label-primary" style="font-size: 10pt;font-family: monospace;">{{status}}</span></td>
       {{else}}
-        <td><span class="label label-danger">{{status}}</span></td>
+        <td><span class="label label-danger" style="font-size: 10pt;font-family: monospace;">{{status}}</span></td>
       {{/if}}
       <td >
         <div class="btn-group">
-            <i class="fa fa-eye view-schedule success" data-toggle="tooltip" data-placement="left" title="" data-original-title="View schedule details" aria-hidden="true"></i> &nbsp;
-            <i class="fa fa-pencil edit-schedule warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Edit this schedule" aria-hidden="true" schedule-id="{{_id}}" departure-location="{{departureLocation}}" arrival-location="{{arrivalLocation}}"></i> &nbsp;
-            <i class="fa fa-trash delete-schedule danger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Delete this schedule" aria-hidden="true"></i> 
+            <i class="fa fa-eye view-schedule success" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="View schedule details" aria-hidden="true"></i> &nbsp;
+            <i class="fa fa-pencil edit-schedule warning" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit this schedule" aria-hidden="true" schedule-id="{{_id}}" departure-location="{{departureLocation}}" arrival-location="{{arrivalLocation}}"></i> &nbsp;
+            <i class="fa fa-trash delete-schedule danger" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="Delete this schedule" aria-hidden="true"></i> 
         </div>
       </td>
     </tr>

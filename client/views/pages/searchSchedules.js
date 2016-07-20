@@ -77,21 +77,21 @@ Template.searchSchedules.rendered = function(){
 	            		var statusHTML;
 	            		var radioButtonHTML;
 	            		if (resultSchedulesList[i].remainingSeats == 0) {
-	            			statusHTML = '<td><span class="label label-danger">booked</span></td>';
+	            			statusHTML = '<td><span class="label label-danger" style="font-size: 10pt;font-family: monospace;">booked</span></td>';
 	            			radioButtonHTML = 	'<div class="radio radio-success" style="margin-top: 0px;">'+
 			                                        '<input type="radio" id="singleRadio2" value="option2" name="radioSingle1" aria-label="Single radio Two" disabled>'+
 			                                        '<label></label>'+
 			                                    '</div>';
 	            		}
 	            		else if (resultSchedulesList[i].status === 'closed') {
-	            			statusHTML = '<td><span class="label label-danger">not available</span></td>';
+	            			statusHTML = '<td><span class="label label-danger" style="font-size: 10pt;font-family: monospace;">not available</span></td>';
 	            			radioButtonHTML = 	'<div class="radio radio-success" style="margin-top: 0px;">'+
 			                                        '<input type="radio" id="singleRadio2" value="option2" name="radioSingle1" aria-label="Single radio Two" disabled>'+
 			                                        '<label></label>'+
 			                                    '</div>';
 	            		}
 	            		else {
-	            			statusHTML = '<td><span class="label label-primary">available</span></td>';
+	            			statusHTML = '<td><span class="label label-primary" style="font-size: 10pt;font-family: monospace;">available</span></td>';
 	            			radioButtonHTML = 	'<div class="radio radio-success" style="margin-top: 0px;">'+
 			                                        `<input type="radio" schedule-id=${resultSchedulesList[i]._id} id="singleRadio2" value="option2" name="bookThisSchedule" aria-label="Single radio Two">`+
 			                                        '<label></label>'+

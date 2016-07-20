@@ -27,7 +27,7 @@ Meteor.methods({
         departureDate,
         departureTime,
         status,
-        createdOn: new Date(),
+        createdOn: moment().format('MMMM Do YYYY, hh:mm:ss'),
         createdBy: Meteor.users.findOne(this.userId).profile.name,
       });
   	},
