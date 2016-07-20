@@ -206,7 +206,6 @@ Template.searchSchedules.rendered = function(){
 			passengerFirstName = $('#passenger-first-name').val();
 			passengerLastName = $('#passenger-last-name').val();
 			Meteor.call('reservations.insert', scheduleId, departureId, arrivalId, passengerFirstName, passengerLastName,  function(error, result) {
-				debugger;
 			});
         }
     }).validate({

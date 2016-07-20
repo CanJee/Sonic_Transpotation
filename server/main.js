@@ -26,3 +26,11 @@ Meteor.users.allow({
     	return true;
     },
 });
+
+Meteor.users.after.insert(function (userId, user) {
+    if (user.profile.type === "admin") {
+        Roles.addUsersToRoles(user._id, 'admin')
+    } else if (user.profile.type === "user") {
+        Roles.addUsersToRoles(user._id, 'user')
+    }
+});

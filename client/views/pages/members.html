@@ -53,6 +53,7 @@
             </div>
         </div>
     </div>
+    {{> createMembersModalTemplate}}
 </template>
 
 <template name="member">
@@ -73,4 +74,62 @@
         </div>
       </td>
     </tr>
+</template>
+
+<template name="createMembersModalTemplate">
+    <div class="modal inmodal fade in" id="createMembersModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-calendar modal-icon"></i>
+                    <h4 class="modal-title">Add a Member</h4>
+                </div>
+                <form class="form-horizontal" id="create-member-form" novalidate="false">
+                    <div class="modal-body">
+
+                        <div class="form-group"><label class="col-lg-4 control-label">Member Name</label>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" name="memberName" id="member-name" class="form-control required" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Email</label>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-at"></i></span>
+                                    <input type="email" name="memberEmail" id="member-email" class="form-control required" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Password</label>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                    <input type="password" name="memberPassword" id="member-password" class="form-control required" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Role</label>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+                                    <select class="chosen-select" id="member-role" name="memberRole" style="width:350px;" tabindex="2">
+                                        <option value="admin">admin</option>
+                                        <option value="user">user</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Member</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </template>

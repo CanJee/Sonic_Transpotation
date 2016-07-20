@@ -57,7 +57,7 @@ Template.createScheduleModalTemplate.rendered = function(){
         },
         errorPlacement: function(error, element) {
 	        error.insertAfter($(element).closest('.input-group'));
-    	},
+    	  },
     });
 };
 
@@ -92,7 +92,7 @@ Template.createScheduleModalTemplate.events({
 
 	  			$('#createScheduleModal').modal('hide');
 
-				toastr.success('Schedule created successfully.');
+				  toastr.success('Schedule created successfully.');
 	  		}
   		});
   	},
