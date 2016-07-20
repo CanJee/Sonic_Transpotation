@@ -73,7 +73,6 @@ Template.register.events({
                 console.log(error.reason); // Output error if registration fails
             } else {
                 Router.go("destinations"); // Redirect user if registration succeeds
-                debugger;
                 Meteor.users.update({_id:Meteor.user()._id}, { $set: { profile: { name: name } } });
             }  
         });

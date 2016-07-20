@@ -16,14 +16,21 @@
                                     <strong class="font-bold" style="font-size: 10pt;font-family: monospace;">{{ currentUserName }} </strong><br>
                                     <strong class="font-bold" style="font-size: 10pt;font-family: monospace;">{{ currentUserEmail }} </strong>
                                 </span>
-                                <span class="text-muted text-xs block" style="font-size: 10pt;font-family: monospace;">status: <span class="label label-warning" style="font-size: 10pt;font-family: monospace;">user</span></span> 
+                                <span class="text-muted text-xs block" style="font-size: 10pt;font-family: monospace;">Role:
+                                    {{#if isInRole 'admin'}} 
+                                        <span class="label label-primary" style="font-size: 10pt;font-family: monospace;">admin</span>
+                                    {{else}}
+                                        <span class="label label-warning" style="font-size: 10pt;font-family: monospace;">user</span>
+                                    {{/if}}
+                                </span> 
                             </span> 
                         </a>
                     </div>
                     <div class="logo-element">
-                        IN+
+                        ST+
                     </div>
                 </li>
+                {{#if isInRole 'admin'}} 
                 <li class="{{isActiveRoute regex='members'}}">
                     <a href="{{pathFor route='members'}}"><i class="fa fa-user"></i> <span class="nav-label">Members</span> </a>
                 </li>
@@ -33,11 +40,8 @@
                 <li class="{{isActiveRoute regex='^schedules'}}">
                     <a href="{{pathFor route='schedules'}}"><i class="fa fa-calendar"></i> <span class="nav-label">Schedules</span> </a>
                 </li>
-                <li class="{{isActiveRoute regex='^searchSchedules'}}">
-                    <a href="{{pathFor route='searchSchedules'}}"><i class="fa fa-search"></i> <span class="nav-label">Search Schedules</span> </a>
-                </li>
-                <li class="{{isActiveRoute regex='reservations'}}">
-                <a href="{{pathFor route='reservations'}}"><i class="fa fa-ticket"></i> <span class="nav-label">Reservations</span> </a>
+                <li class="{{isActiveRoute regex='^adminReservations'}}">
+                    <a href="{{pathFor route='adminReservations'}}"><i class="fa fa-ticket"></i> <span class="nav-label">Reservations</span> </a>
                 </li>
                 <li class="{{isActiveRoute regex='viewInvoice'}}">
                 <a href="{{pathFor route='viewInvoice'}}"><i class="fa fa-money"></i> <span class="nav-label">Invoice</span> </a>
@@ -52,7 +56,14 @@
                   <li class="{{isActiveRoute regex='settings'}}">
                 <a href="{{pathFor route='settings'}}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span> </a>
                 </li>
-
+                {{else}}
+                    <li class="{{isActiveRoute regex='^searchSchedules'}}">
+                        <a href="{{pathFor route='searchSchedules'}}"><i class="fa fa-search"></i> <span class="nav-label">Search Schedules</span> </a>
+                    </li>
+                    <li class="{{isActiveRoute regex='^reservations'}}">
+                        <a href="{{pathFor route='reservations'}}"><i class="fa fa-ticket"></i> <span class="nav-label">My Reservations</span> </a>
+                    </li>
+                {{/if}}
             </ul>
         </div>
     </nav>

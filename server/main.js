@@ -8,3 +8,21 @@ Meteor.startup(() => {
   Destinations._ensureIndex({iso: 1}, {unique: 1});
   Destinations._ensureIndex({location: 1}, {unique: 1});
 });
+
+Meteor.publish("directory", function () {
+	return Meteor.users.find({}, {fields: {emails: 1, profile: 1, createdAt: 1}});
+});
+
+Meteor.users.allow({
+    update: function () {
+     // add custom authentication code here
+    return true;
+    },
+    insert: function () {
+     // add custom authentication code here
+    return true;
+    },
+    remove: function () {
+    	return true;
+    },
+});

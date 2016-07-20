@@ -72,8 +72,8 @@ Router.route('/viewInvoice', function () {
     this.render('viewInvoice');
 });
 
-Router.route('/reservations', function () {
-    this.render('reservations');
+Router.route('/adminReservations', function () {
+    this.render('adminReservations');
 });
 
 Router.route('/settings', function () {
@@ -90,5 +90,5 @@ Router.route('/members', function () {
 
 Router.route('/*', function () {
     this.render('errorTwo');
-    this.layout('blankLayout')
+    this.layout('blankLayout');
 });
