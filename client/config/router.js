@@ -1,5 +1,3 @@
-import { Members } from '../../imports/api/roles.js';
-
 Router.configure({
     layoutTemplate: 'mainLayout',
     notFoundTemplate: 'errorOne',
