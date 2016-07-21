@@ -16,23 +16,24 @@ Meteor.methods({
     if (! this.userId) {
       throw new Meteor.Error('not-authorized');
     }
-	Reservations.insert({
-	    scheduleId,
-	    departureId,
-	    arrivalId,
-	    reservedByUserId: this.userId,
-	    reservedByUserName: Meteor.users.findOne(this.userId).profile.name,
-	    reservedByUserEmail: Meteor.users.findOne(this.userId).emails[0].address,
-	    passengerFirstName,
-	    passengerLastName,
-	    status: 'confirmed',
-	    reservationDate: moment().format('ddd MMMM Do YYYY'),
-	});
-	updateSchedule = Schedules.find({ _id: scheduleId }).fetch()[0];
-	remainingSeats = parseInt(updateSchedule.remainingSeats);
-	remainingSeats--;
-	remainingSeats = remainingSeats.toString();
-	Schedules.update({_id : scheduleId},{$set:{remainingSeats}});
+  	var createdReservationId = Reservations.insert({
+  	    scheduleId,
+  	    departureId,
+  	    arrivalId,
+  	    reservedByUserId: this.userId,
+  	    reservedByUserName: Meteor.users.findOne(this.userId).profile.name,
+  	    reservedByUserEmail: Meteor.users.findOne(this.userId).emails[0].address,
+  	    passengerFirstName,
+  	    passengerLastName,
+  	    status: 'confirmed',
+  	    reservationDate: moment().format('ddd MMMM Do YYYY'),
+  	});
+  	updateSchedule = Schedules.find({ _id: scheduleId }).fetch()[0];
+  	remainingSeats = parseInt(updateSchedule.remainingSeats);
+  	remainingSeats--;
+  	remainingSeats = remainingSeats.toString();
+  	Schedules.update({_id : scheduleId},{$set:{remainingSeats}});
+    return createdReservationId;
   },
   'reservations.find'(reservationId) {
     check(reservationId, String);

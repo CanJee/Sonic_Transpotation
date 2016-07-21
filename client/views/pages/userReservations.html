@@ -1,0 +1,89 @@
+<template name="userReservations">
+
+    {{> pageHeading title='My Reservations' }}
+
+ <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="m-t-lg">
+                    <h1>
+                        My Reservations
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                               placeholder="Search in table">
+
+                        <table class="footable table table-stripped toggle-arrow-tiny reservations-list" data-page-size="15" data-paging="true" data-filter=#filter>
+                            <thead>
+                            <tr>
+
+                                <th data-toggle="true">Reservation ID</th>
+                                <th>Departing</th>
+                                <th>Arriving</th>
+                                <th>Status</th>
+                                <th>Departure Date</th>
+                                <th data-hide="all">Price</th>
+                                <th data-hide="all">Reserved By User Name</th>
+                                <th data-hide="all">Reserved By User Email</th>
+                                <th data-hide="all">Passenger Name</th>
+                                <th data-hide="all">Reservation Date</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {{#each reservations}}
+                                    {{> userReservation}}
+                                {{/each}}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="10">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{invokeAfterLoad}}
+</template>
+
+<template name="userReservation">
+    <tr>
+      <td>{{_id}}</td>
+      <td>{{departureLocation}}</td>
+      <td>{{arrivalLocation}}</td>
+      {{#if cancelled}}
+        <td><span class="label label-danger" style="font-size: 10pt;font-family: monospace;">cancelled</span></td>
+      {{else}}
+        <td><span class="label label-primary" style="font-size: 10pt;font-family: monospace;">confirmed</span></td>
+      {{/if}}
+      <td>{{departureDate}} {{departureTime}}</td>
+      <td><span class="text-navy">${{price}}</span></td>
+      <td>{{reservedByUserName}}</td>
+      <td>{{reservedByUserEmail}}</td>
+      <td>{{passengerFirstName}} {{passengerLastName}}</td>
+      <td>{{reservationDate}}</td>
+      <td >
+        <div class="btn-group">
+            {{#if cancelled}}
+                <button type="button" class="btn btn-w-m btn-danger btn-xs" disabled>Cancelled</button>
+            {{else}}
+                <button type="button" id="view-invoice" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-file-pdf-o" style="margin-right: 5px;"></i>View</button>
+                <button type="button" id="print-ticket" class="btn btn-outline btn-success btn-xs"><i class="fa fa-print" style="margin-right: 5px;"></i>Print</button>
+                <button type="button" schedule-id="{{_id}}" id="cancel-reservation" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-ban" style="margin-right: 5px;"></i>Cancel</button>
+            {{/if}}
+        </div>
+      </td>
+    </tr>
+</template>

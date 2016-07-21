@@ -186,27 +186,33 @@ Template.searchSchedules.rendered = function(){
         },
         onFinished: function (event, currentIndex)
         {
-        	setTimeout(function() {
-			  	swal({
-		            title: "Reservation Complete",
-		            text: "Your Reservation is complete.",
-		            type: "success"
-	        	},
-	        	function(){
-				    window.location.href = 'searchSchedules';
-				});
-			}, 5000);
             
 	        $('.summary-view').hide();
 			$('.loading-view').show();
-
+            var createdReservationId;
 			scheduleId = $('input[name=bookThisSchedule]:checked').attr('schedule-id');
 			departureId = $('#search-departure-location').val();
 			arrivalId = $('#search-arrival-location').val();
 			passengerFirstName = $('#passenger-first-name').val();
 			passengerLastName = $('#passenger-last-name').val();
 			Meteor.call('reservations.insert', scheduleId, departureId, arrivalId, passengerFirstName, passengerLastName,  function(error, result) {
+                if (!error) {
+                    createdReservationId = result;
+                }
 			});
+
+            setTimeout(function() {
+                swal({
+                    html: true,
+                    title: "Reservation Confirmed",
+                    confirmButtonText: "Close",
+                    text: `Your Reservation is confirmed. You reservation id is <strong>${createdReservationId}</strong>. <div class="row"><button type="button" id="view-invoice-btn"><i class="fa fa-file-pdf-o" style="margin-right: 10px;"></i>View Invoice</button><button type="button" id="print-ticket-btn"><i class="fa fa-print" style="margin-right: 10px;"></i>Print Ticket</button></div>`,
+                    type: "success"
+                },
+                function(){
+                    window.location.href = 'userReservations';
+                });
+            }, 5000);
         }
     }).validate({
         errorPlacement: function (error, element)

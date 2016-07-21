@@ -1,5 +1,7 @@
 <template name="schedules">
-
+    {{#if showPassengerList }}
+        {{> passengerList }}
+    {{else}}
     {{> pageHeading title='Schedules' }}
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -59,6 +61,7 @@
     </div>
     {{> createScheduleModalTemplate}}
     {{> editScheduleModalTemplate}}
+    {{/if}}
 </template>
 
 <template name="schedule">
@@ -85,7 +88,7 @@
       {{/if}}
       <td >
         <div class="btn-group">
-            <i class="fa fa-eye view-schedule success" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="View schedule details" aria-hidden="true"></i> &nbsp;
+            <i class="fa fa-eye view-schedule success" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="View passenger list" schedule-id="{{_id}}" aria-hidden="true"></i> &nbsp;
             <i class="fa fa-pencil edit-schedule warning" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit this schedule" aria-hidden="true" schedule-id="{{_id}}" departure-location="{{departureLocation}}" arrival-location="{{arrivalLocation}}"></i> &nbsp;
             <i class="fa fa-trash delete-schedule danger" data-container="body" data-toggle="tooltip" data-placement="left" title="" data-original-title="Delete this schedule" aria-hidden="true"></i> 
         </div>

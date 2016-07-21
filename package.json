@@ -6,8 +6,11 @@
   },
   "dependencies": {
     "card": "^2.0.1",
+    "install": "^0.8.1",
     "jquery": "^2.2.4",
     "meteor-node-stubs": "~0.2.0",
+    "node": "0.0.0",
+    "npm": "^3.10.5",
     "toastr": "^2.1.2"
   }
 }

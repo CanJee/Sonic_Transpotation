@@ -81,7 +81,9 @@
             {{#if cancelled}}
                 <button type="button" class="btn btn-w-m btn-danger btn-xs" disabled>Cancelled</button>
             {{else}}
-                <button type="button" schedule-id="{{_id}}" id="cancel-reservation" class="btn btn-outline btn-danger btn-xs">Cancel</button>
+                <button type="button" id="view-invoice" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-file-pdf-o" style="margin-right: 5px;"></i>View</button>
+                <button type="button" id="print-ticket" class="btn btn-outline btn-success btn-xs"><i class="fa fa-print" style="margin-right: 5px;"></i>Print</button>
+                <button type="button" schedule-id="{{_id}}" id="cancel-reservation" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-ban" style="margin-right: 5px;"></i>Cancel</button>
             {{/if}}
         </div>
       </td>

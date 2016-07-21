@@ -2,104 +2,21 @@
 
     {{> pageHeading title='Analytics' }}
 
- <div class="col-sm-10 col-md-11 main">
-          <div class="row" >
-           <div class="col-sm-12 col-md-12" style="padding-left:0px;">
-                <h1 class="page-header">Statistics</h1>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Ticket Sales Chart</h5>
             </div>
-          </div>
+            <div class="ibox-content">
 
-          <div class="row">
-            <form action="http://tripexpress-shpetim.rhcloud.com/index.php/admin/statistics/show_stats" method="post" accept-charset="utf-8">                <div class="col-sm-2 col-md-2 date" id="datepicker1" style="padding-left:0px;">
-                  <input type="text" class="form-control" name="from_date" data-date-format="YYYY-MM-DD" value="2016-07-01"> <!-- value="22-01-2016" -->
-                  <span class="input-group-addon"><span class="icon-calendar"></span>
-                  </span>
-                  <script type="text/javascript">
-                              $(function () {
-                                $('#datepicker1').datetimepicker({
-                                  pickTime: false,
-                                  useCurrent: false
-                                });
-                              });
-                            </script>
+                <div>
+                  <canvas id="lineChart" height="140"></canvas>
                 </div>
-                <div class="col-sm-2 col-md-2 date" id="datepicker2" style="padding-left:0px;">
-                <input type="text" class="form-control" name="to_date" data-date-format="YYYY-MM-DD" value="2016-07-31" > <!-- value="22-01-2016" -->
-                <span class="input-group-addon"><span class="icon-calendar"></span>
-                </span>
-                <script type="text/javascript">
-                            $(function () {
-                              $('#datepicker2').datetimepicker({
-                                pickTime: false,
-                                useCurrent: false
-                                });
-                            });
-                          </script>
-              </div>
-              <div class="col-sm-2 col-md-2 ">
-                  <select class="form-control" name="members"   >
-                      <option value="null">All members</option>
-                      <option value="1" >admin</option><option value="19" >member</option><option value="15" >vishalemp</option><option value="16" >qwert</option><option value="17" >vishal</option>                
-                      </select>
-              
-
             </div>
-              <div class="col-sm-2 col-md-2 date" id="datepicker2" style="padding-left:0px;">
-                <button type="submit" class="btn btn-primary" value="submit">Update</button>
-              </div>
-            </form>          </div>
-
-          <div class="row" style="margin-top:20px;">
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Tickets sold</th>
-                    <th>One way tickets income</th>
-                    <th>Round trip tickets income</th>
-                    <th>Total income</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>7</td>
-                    <td>1240.00 $</td>
-                    <td>0.00 $</td>
-                    <td>1240.00 $</td>
-                  </tr>
-                </tbody>
-              </table>
-              </div>
-          </div>
-
-          <div class="row">
-            <div id="myfirstchart" style="height: 250px;"></div>
-          </div>
-
-         </div>
-
-         <script type="text/javascript">
-         new Morris.Line({
-
-          // ID of the element in which to draw the chart.
-          element: 'myfirstchart',
-          // Chart data records -- each entry in this array corresponds to a point on
-          // the chart.
-
-          data: [{"month":"2016-07-02","value":"4"},{"month":"2016-07-08","value":"1"},{"month":"2016-07-11","value":"1"},{"month":"2016-07-16","value":"1"}],
-          // The name of the data record attribute that contains x-values.
-          xkey: 'month',
-          // A list of names of data record attributes that contain y-values.
-          ykeys: ['value'],
-          // Labels for the ykeys -- will be displayed when you hover over the
-          // chart.
-          labels: ['Tickets'],
-          xLabels: "day"
-
-        });
-         </script>
-
- <!-- #endof row -->
+        </div>
+      </div>
+  </div>
  </template>
 
 

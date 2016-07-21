@@ -6,7 +6,17 @@
             </div>
             <img class="sonic-logo" src="images/sonic-logo.png">
             <ul class="nav navbar-top-links navbar-right">
-                
+                     <li class="dropdown" style="width: 85px;">
+                    <a class="dropdown-toggle btn btn-white set_en" data-toggle="dropdown" href="#" style="background: #f3f3f4;">
+                        <img src="img/flags/32/United-States.png"> EN
+                    </a>
+                    <ul class="dropdown-menu" style="width: 85px; min-width: 0px; background: #f3f3f4;">
+                        <li>
+                            <a class="btn btn-white set_fr" style="background: #f3f3f4; padding-left: 11px;"><img src="img/flags/32/France.png"> FR</a>
+                            <a class="btn btn-white set_es" style="background: #f3f3f4; padding-left: 11px;"><img src="img/flags/32/Spain.png"> ES</a>
+                        </li>
+                    </ul>
+                </li>
                     {{#if currentUser}}
                         <li>
                             <a class="logout" href="#">

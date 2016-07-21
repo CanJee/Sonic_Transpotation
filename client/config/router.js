@@ -95,6 +95,7 @@ Router.route('/destinations', function () {
 Router.route('/schedules', function () {
     if (isAdmin()){
     	this.render('schedules');
+    	Session.set('showPassengerList', false);
     }
     else {
     	Router.go('errorOne', {replaceState: true});
@@ -103,6 +104,10 @@ Router.route('/schedules', function () {
 
 Router.route('/searchSchedules', function () {
     this.render('searchSchedules');
+});
+
+Router.route('/userReservations', function () {
+    this.render('userReservations');
 });
 
 Router.route('/adminReservations', function () {

@@ -10,6 +10,9 @@ Template.navigation.events({
 
     'click .close-canvas-menu' : function(){
         $('body').toggleClass("mini-navbar");
+    },
+    'click .schedules-nav' : function(){
+        Session.set('showPassengerList', false);
     }
 
 });

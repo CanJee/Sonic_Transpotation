@@ -6,6 +6,7 @@ Template.schedules.rendered = function(){
 
     // Initialize fooTable
     $('.schedules-list').footable();
+    Session.setDefault('showPassengerList', false);
 
 };
 
@@ -37,6 +38,9 @@ Template.schedules.helpers({
 	})
 	return objArray;
   },
+  'showPassengerList': function(){
+   	return Session.get('showPassengerList');
+   }
 });
 
 Template.schedules.events({
@@ -56,10 +60,17 @@ Template.schedules.events({
     	const departureLocation = $(event.target).attr('departure-location')
     	const arrivalLocation = $(event.target).attr('arrival-location')
 		$('#editScheduleModal').modal('show', $(this));
-	}
+	},
+	'click .view-schedule'(event) {
+		event.preventDefault();
+    	const scheduleId = $(event.target).attr('schedule-id');
+    	Session.set('showPassengerList', true);
+    	Session.set('passengerListScheduleId', scheduleId);
+	},
 });
 
 Template.schedule.rendered = function(){
+	$('body').tooltip('destroy');
 	$("[data-toggle=tooltip]").tooltip({
     	container: 'body',
 	});
