@@ -9,8 +9,7 @@ Template.destinations.rendered = function(){
         rules: {
             location: {
                 required: true,
-                minlength: 3,
-                lettersonly: true
+                minlength: 3
             },
             min: {
                 required: true,
