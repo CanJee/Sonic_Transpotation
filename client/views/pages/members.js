@@ -180,9 +180,7 @@ Template.editMembersModalTemplate.events({
 		role = $('#edit-member-role').val();
 
 		var userCreated = Meteor.call('members.update', editMemberId, email, password, name, role, function(error, result) {
-        	debugger;
         	if (!error && result === true) {
-        		debugger;
         		$('#editMembersModal').modal('hide');
         		toastr.success('Member updated successfully.');
         	}
