@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Members } from '../../../imports/api/members.js';
 
+var editMemberId;
+
 Template.members.rendered = function(){
 
 };
@@ -8,6 +10,9 @@ Template.members.rendered = function(){
 Template.members.events({
 	'click .add-member'(event) {
 		$('#createMembersModal').modal('show');
+	},
+	'click .edit-member'(event) {
+		$('#editMembersModal').modal('show', $(this));
 	},
 });
 
@@ -68,16 +73,20 @@ Template.member.events({
 		    },
 	    	function (isConfirm) {
 		        if (isConfirm) {
-					Meteor.users.remove({ _id: memberId });
-		            swal({
-		            	html:true,
-			            title: "Deleted!",
-			            text: `Member with ID <strong>${memberId}</strong> has been deleted successfully.`,
-			            type: "success",
-			        },
-		        	function(){
-					    toastr.success('User removed successfully.');
+					Meteor.call('members.remove', memberId, function(error, result) {
+						if (!error) {
+							swal({
+				            	html:true,
+					            title: "Deleted!",
+					            text: `Member with ID <strong>${memberId}</strong> has been deleted successfully.`,
+					            type: "success",
+					        },
+				        	function(){
+							    toastr.success('User removed successfully.');
+							});
+						}
 					});
+		            
 		        } else {
 					swal({
 						html:true,
@@ -110,10 +119,8 @@ Template.createMembersModalTemplate.rendered = function(){
     }
 	$('.chosen-container.chosen-container-single').attr("style", "width: 545px !important;");
 	$('.chosen-container.chosen-container-single .chosen-drop').attr("style", "width: 545px !important;");
+	$($('#member-role').closest('div')).find('.chosen-search').attr("style", "display: none;");
 	$("#create-member-form").validate({
-        rules: {
-
-        },
         errorPlacement: function(error, element) {
 	    	error.insertAfter($(element).closest('.input-group'));
     	},
@@ -127,18 +134,57 @@ Template.createMembersModalTemplate.events({
 		email = $('#member-email').val();
 		password = $('#member-password').val();
 		role = $('#member-role').val();
-		var options = {
-            email,
-            password,
-            profile: {
-                name,
-                type: role,
-            },
-        }
-        var createdUserId = Accounts.createUser( options , function(error){
-        	if (!error) {
+
+        var userCreated = Meteor.call('members.create', email, password, name, role, function(error, result) {
+        	if (!error && result === true) {
         		$('#createMembersModal').modal('hide');
         		toastr.success('Member created successfully.');
+        	}
+        });
+	},
+});
+
+Template.editMembersModalTemplate.rendered = function(){
+	var config = {
+        '.chosen-select'           : {},
+        '.chosen-select-deselect'  : {allow_single_deselect:true},
+        '.chosen-select-no-single' : {disable_search_threshold:10},
+        '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+        '.chosen-select-width'     : {width:"95%"},
+	}
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+	$('.chosen-container.chosen-container-single').attr("style", "width: 545px !important;");
+	$('.chosen-container.chosen-container-single .chosen-drop').attr("style", "width: 545px !important;");
+	$($('#edit-member-role').closest('div')).find('.chosen-search').attr("style", "display: none;");
+	$("#edit-member-form").validate({
+        errorPlacement: function(error, element) {
+	    	error.insertAfter($(element).closest('.input-group'));
+    	},
+    });
+};
+
+Template.editMembersModalTemplate.events({
+	'show.bs.modal #editMembersModal': function(e){
+		editMemberId = $(event.target).attr('member-id');
+		member = Meteor.users.find({_id : editMemberId}).fetch()[0];
+		$('#edit-member-name').val(member.profile.name);
+		$('#edit-member-email').val(member.emails[0].address);
+	},
+	'submit #edit-member-form'(event) {
+		event.preventDefault();
+		name = $('#edit-member-name').val()
+		email = $('#edit-member-email').val();
+		password = $('#edit-member-password').val();
+		role = $('#edit-member-role').val();
+
+		var userCreated = Meteor.call('members.update', editMemberId, email, password, name, role, function(error, result) {
+        	debugger;
+        	if (!error && result === true) {
+        		debugger;
+        		$('#editMembersModal').modal('hide');
+        		toastr.success('Member updated successfully.');
         	}
         });
 	},

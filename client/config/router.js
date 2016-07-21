@@ -1,7 +1,12 @@
+import { Members } from '../../imports/api/roles.js';
+
 Router.configure({
     layoutTemplate: 'mainLayout',
-    notFoundTemplate: 'notFound'
-
+    notFoundTemplate: 'errorOne',
+    loadingTemplate: 'loading',
+    waitOn: function () {
+		return [ Meteor.subscribe("roles") ];
+    }
 });
 
 Router.onBeforeAction(myAdminHookFunction, {
@@ -23,9 +28,14 @@ function myAdminHookFunction() {
 	}
 }
 
-//
-// Example pages routes
-//
+function isAdmin() {
+	if (Roles.userIsInRole( Meteor.userId(), 'admin' )) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 
 Router.route('/register', function () {
 	if (!Meteor.userId()) {
@@ -33,7 +43,12 @@ Router.route('/register', function () {
 	    this.layout('blankLayout')
 	}
 	else {
-		Router.go('destinations', {replaceState: true});
+		if (isAdmin()){
+			Router.go('destinations', {replaceState: true});
+		}
+		else {
+			Router.go('searchSchedules', {replaceState: true});
+		}
 	}
 
 });
@@ -44,51 +59,91 @@ Router.route('/login', function () {
 	    this.layout('blankLayout')
 	}
 	else {
-		Router.go('destinations', {replaceState: true});
+		if (isAdmin()){
+			Router.go('destinations', {replaceState: true});
+		}
+		else {
+			Router.go('searchSchedules', {replaceState: true});
+		}
 	}
 });
 
 Router.route('/', function () {
-    Router.go('destinations', {replaceState: true});
+	if (isAdmin()){
+    	Router.go('destinations', {replaceState: true});
+    }
+    else {
+    	Router.go('searchSchedules', {replaceState: true});
+    }
 });
 
 Router.route('/errorTwo', function () {
-    Router.go('errorTwo');
+    this.render('errorTwo');
+});
+
+Router.route('/errorOne', function () {
+    this.render('errorOne');
 });
 
 Router.route('/destinations', function () {
-    this.render('destinations');
+    if (isAdmin()){
+    	this.render('destinations');
+    }
+    else {
+    	Router.go('errorOne', {replaceState: true});
+    }
 });
 
 Router.route('/schedules', function () {
-    this.render('schedules');
+    if (isAdmin()){
+    	this.render('schedules');
+    }
+    else {
+    	Router.go('errorOne', {replaceState: true});
+    }
 });
 
 Router.route('/searchSchedules', function () {
     this.render('searchSchedules');
 });
 
-Router.route('/viewInvoice', function () {
-    this.render('viewInvoice');
-});
-
 Router.route('/adminReservations', function () {
-    this.render('adminReservations');
+    if (isAdmin()){
+    	this.render('adminReservations');
+    }
+    else {
+    	Router.go('errorOne', {replaceState: true});
+    }
+
 });
 
 Router.route('/settings', function () {
-    this.render('settings');
+    if (isAdmin()){
+    	this.render('settings');
+    }
+    else {
+    	Router.go('errorOne', {replaceState: true});
+    }
 });
 
 Router.route('/analytics', function () {
-    this.render('analytics');
+    if (isAdmin()){
+    	this.render('analytics');
+    }
+    else {
+    	Router.go('errorOne', {replaceState: true});
+    }
 });
 
 Router.route('/members', function () {
-    this.render('members');
+    if (isAdmin()){
+    	this.render('members');
+    }
+    else {
+    	Router.go('errorOne', {replaceState: true});
+    }
 });
 
 Router.route('/*', function () {
-    this.render('errorTwo');
-    this.layout('blankLayout');
+    Router.go('errorOne', {replaceState: true});
 });

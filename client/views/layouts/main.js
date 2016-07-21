@@ -70,7 +70,7 @@ Template.register.events({
         }
         Accounts.createUser( options , function(error){
             if(error){
-                console.log(error.reason); // Output error if registration fails
+                toastr.error(error.reason); // Output error if registration fails
             } else {
                 Router.go("destinations"); // Redirect user if registration succeeds
                 Meteor.users.update({_id:Meteor.user()._id}, { $set: { profile: { name: name } } });
@@ -87,7 +87,7 @@ Template.loginTwo.events({
         var password = $('[type=password]').val();
         Meteor.loginWithPassword(email, password, function(error){
             if(error){
-                console.log(error.reason);
+                toastr.error(error.reason);
             } else {
                 Router.go("destinations");
             }

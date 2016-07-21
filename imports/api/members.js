@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-Meteor.subscribe("directory");
+Meteor.subscribe("members");
 
 Meteor.methods({
   	'members.remove'(memberId) {
