@@ -26,7 +26,6 @@ Template.createScheduleModalTemplate.rendered = function(){
         calendarWeeks: true,
         autoclose: true,
         todayHighlight: true,
-        format: 'D, d MM, yyyy',
     });
     $('.schedule-time').clockpicker();
 
