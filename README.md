@@ -2,20 +2,15 @@
 ## version: 1.0
 ## DEMO: https://sonic-transportation.herokuapp.com
 
+[![Build Status](https://travis-ci.org/CanJee/Sonic_Transpotation.svg?branch=master)](https://travis-ci.org/CanJee/Sonic_Transpotation)
+
 ADMIN:
 
-
-username: roger@federer.com
-
-password: password
+username: roger@federer.com                                                                                     password: password
 
 STANDARD USER:
 
-username: serena@williams.com
-
-password: password
-
-[![Build Status](https://travis-ci.org/CanJee/Sonic_Transpotation.svg?branch=master)](https://travis-ci.org/CanJee/Sonic_Transpotation)
+username: serena@williams.com                                                                                   password: password
 
 Meteor.js is an open-source platform built on Node and MongoDB
 
