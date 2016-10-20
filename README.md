@@ -13,7 +13,7 @@
 
 `username: serena@williams.com`   
 `password: password`
-
+##
 Meteor.js is an open-source platform built on Node and MongoDB
 
 See documentation of Meteor to learn more: http://docs.meteor.com/#/full/
