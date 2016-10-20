@@ -4,13 +4,15 @@
 
 [![Build Status](https://travis-ci.org/CanJee/Sonic_Transpotation.svg?branch=master)](https://travis-ci.org/CanJee/Sonic_Transpotation)
 
-ADMIN:
+## ADMIN:
 
-username: roger@federer.com                                                                                     password: password
+`username: roger@federer.com`
+`password: password`
 
-STANDARD USER:
+## STANDARD USER:
 
-username: serena@williams.com                                                                                   password: password
+`username: serena@williams.com`   
+`password: password`
 
 Meteor.js is an open-source platform built on Node and MongoDB
 
