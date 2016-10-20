@@ -6,7 +6,7 @@
 
 ## ADMIN:
 
-`username: roger@federer.com`
+`username: roger@federer.com`      
 `password: password`
 
 ## STANDARD USER:
